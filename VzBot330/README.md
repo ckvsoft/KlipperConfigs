@@ -1,4 +1,4 @@
-# VzBot 330 config
+# VzBot 330
 VzBot 330 (tronxy x5sa) configuration files
 
 ## Motherboard
