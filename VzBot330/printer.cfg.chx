@@ -3,6 +3,8 @@
 [include configs/index.cfg]
 [include macros/index.cfg]
 
+[exclude_object]
+
 ##### VzBoT############
 #######################
 
@@ -157,14 +159,16 @@ stealthchop_threshold: 0
 [extruder]
 ### LGX Lite (200 * 16 / 562)
 step_pin: PE15
-dir_pin: PE11
+dir_pin: !PE11
 microsteps: 16
 enable_pin: !PF2
-rotation_distance: 5.693950178
+# rotation_distance: 5.693950178
+rotation_distance: 22
+gear_ratio: 50:10
 nozzle_diameter: 0.4
 filament_diameter: 1.750
 heater_pin: PB0
-sensor_type: ATC Semitec 104NT-4-R025H42G #eneric 3950 #PT1000
+sensor_type: ATC Semitec 104NT-4-R025H42G #Generic 3950 #PT1000
 sensor_pin: PF4
 ###
 #control: pid
@@ -175,11 +179,11 @@ min_temp: 0
 max_temp: 300
 full_steps_per_rotation: 200
 max_extrude_only_distance: 500.0
-max_extrude_cross_section: 300
+max_extrude_cross_section: 5 ;300
 max_extrude_only_velocity: 120
 max_extrude_only_accel: 10000
 min_extrude_temp: 0
-pressure_advance: 0.035
+pressure_advance: 0.025
 pressure_advance_smooth_time: 0.03
 #step_pulse_duration: 0.000004
 [tmc2209 extruder]
@@ -233,10 +237,10 @@ path: ~/gcode_files
 ########################
 
 [bed_screws]
-screw1: 20,20
-screw2: 20,290
-screw3: 290,290
-screw4: 290,20
+screw1: 8,8
+screw2: 323, 8
+screw3: 165,320
+screw4: 165,165
 
 ########################
 ########################
@@ -251,7 +255,7 @@ screw4: 290,20
 #*# DO NOT EDIT THIS BLOCK OR BELOW. The contents are auto-generated.
 #*#
 #*# [stepper_z]
-#*# position_endstop = 4.230
+#*# position_endstop = 14.200
 #*#
 #*# [heater_bed]
 #*# control = pid
