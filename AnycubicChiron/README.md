@@ -1,5 +1,5 @@
-# AcChiron
-Abycubic Chiron configuration files
+# AnycubicChiron
+Anycubic Chiron configuration files
 
 ## Motherboard
 BTT SKR2 V2
