@@ -23,7 +23,7 @@ square_corner_velocity: 10
 
 [mcu]
 serial:/dev/serial/by-id/usb-Klipper_stm32f407xx_210031000447393436343431-if00
-# restart_method: command
+restart_method: command
 
 ########################
 ########################
@@ -55,30 +55,11 @@ stealthchop_threshold: 0
 #cs_pin: PC4
 #spi_bus: spi3
 #interpolate: false
-#run_current: 1.8
-#spi_speed: 1000000
+#run_current: 1.75
+#sense_resistor: 0.033
 #stealthchop_threshold: 0
-#driver_IHOLDDELAY: 6
-#driver_TPOWERDOWN: 10
-#driver_TBL: 2
-#driver_TOFF: 3
-#driver_HEND: 2
-#driver_HSTRT: 0
-#driver_TPFD: 0
-#driver_PWM_AUTOSCALE: True
-#driver_PWM_AUTOGRAD: True
-#driver_PWM_FREQ: 2
-#driver_PWM_GRAD: 0
-#driver_PWM_OFS: 0
-#driver_PWM_REG: 0
-#driver_PWM_LIM: 0
-## diag1_pin: PG12
-## hold_current: 0.5
-## driver_SGT: 1
-## sense_resistor: 0.075
-
-
-
+#driver_TBL: 0
+#driver_TOFF: 1
 
 [stepper_y]
 step_pin: PE1  # Drive5
@@ -107,30 +88,11 @@ stealthchop_threshold: 0
 #spi_bus: spi3
 #cs_pin: PF12
 #interpolate: false
-#run_current: 1.8
-#spi_speed: 1000000
+#run_current: 1.75
+#sense_resistor: 0.033
 #stealthchop_threshold: 0
-#driver_IHOLDDELAY: 6
-#driver_TPOWERDOWN: 10
-#driver_TBL: 2
-#driver_TOFF: 3
-#driver_HEND: 2
-#driver_HSTRT: 0
-#driver_TPFD: 0
-#driver_PWM_AUTOSCALE: True
-#driver_PWM_AUTOGRAD: True
-#driver_PWM_FREQ: 2
-#driver_PWM_GRAD: 0
-#driver_PWM_OFS: 0
-#driver_PWM_REG: 0
-#driver_PWM_LIM: 0
-## diag1_pin: PG12
-## hold_current: 0.5
-## driver_SGT: 1
-## sense_resistor: 0.075
-
-
-
+#driver_TBL: 0
+#driver_TOFF: 1
 
 [stepper_z]
 step_pin: PE14
@@ -158,6 +120,7 @@ stealthchop_threshold: 0
 
 [extruder]
 ### LGX Lite (200 * 16 / 562)
+### VzHextrudort Alu (200 * 16 / 145.455)
 step_pin: PE15
 dir_pin: !PE11
 microsteps: 16
@@ -168,7 +131,8 @@ gear_ratio: 50:10
 nozzle_diameter: 0.4
 filament_diameter: 1.750
 heater_pin: PB0
-sensor_type: ATC Semitec 104NT-4-R025H42G #Generic 3950 #PT1000
+# sensor_type: ATC Semitec 104NT-4-R025H42G #Generic 3950 #PT1000
+sensor_type: PT1000 #Generic 3950 #PT1000
 sensor_pin: PF4
 ###
 #control: pid
@@ -176,7 +140,7 @@ sensor_pin: PF4
 #pid_Ki = 1.275
 #pid_Kd = 148.759
 min_temp: 0
-max_temp: 300
+max_temp: 350
 full_steps_per_rotation: 200
 max_extrude_only_distance: 500.0
 max_extrude_cross_section: 5 ;300
@@ -208,7 +172,7 @@ sensor_pin: PC1
 #pid_Kd: 317.878
 min_temp: 0
 max_temp: 130
-max_power: 0.87
+max_power: 1 #0.87
 
 [pause_resume]
 recover_velocity: 350
@@ -226,7 +190,7 @@ recover_velocity: 350
 # G28 Z0
 
 [virtual_sdcard]
-path: ~/gcode_files
+path: ~/printer_data/gcodes
 
 ########################
 ########################
@@ -255,19 +219,19 @@ screw4: 165,165
 #*# DO NOT EDIT THIS BLOCK OR BELOW. The contents are auto-generated.
 #*#
 #*# [stepper_z]
-#*# position_endstop = 14.200
+#*# position_endstop = 15.665
 #*#
 #*# [heater_bed]
 #*# control = pid
-#*# pid_kp = 48.957
-#*# pid_ki = 2.611
-#*# pid_kd = 229.487
+#*# pid_kp = 58.529
+#*# pid_ki = 3.580
+#*# pid_kd = 239.235
 #*#
 #*# [extruder]
 #*# control = pid
-#*# pid_kp = 28.069
-#*# pid_ki = 2.430
-#*# pid_kd = 81.048
+#*# pid_kp = 22.631
+#*# pid_ki = 1.775
+#*# pid_kd = 72.135
 #*#
 #*# [input_shaper]
 #*# shaper_type_x = ei
