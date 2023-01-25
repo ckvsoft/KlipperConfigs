@@ -219,7 +219,7 @@ screw4: 165,165
 #*# DO NOT EDIT THIS BLOCK OR BELOW. The contents are auto-generated.
 #*#
 #*# [stepper_z]
-#*# position_endstop = 15.665
+#*# position_endstop = 14.755
 #*#
 #*# [heater_bed]
 #*# control = pid
