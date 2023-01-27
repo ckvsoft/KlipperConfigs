@@ -37,7 +37,7 @@ VNUM3=${VERSION_BITS[2]}
 VNUM3=$((VNUM3+1))
 
 #create new tag
-NEW_TAG="v${VNUM1}.${VNUM2}.${VNUM3}"
+NEW_TAG="${VNUM1}.${VNUM2}.${VNUM3}"
 
 #get current hash and see if it already has a tag
 GIT_COMMIT=`git rev-parse HEAD`
