@@ -1,33 +1,7 @@
 #!/bin/bash
 
-bump_version_tag(){
-    if [ -z "$(git ls-remote --tags origin)" ]; then
-        local new_tag="v1.0.0"
-    else
-        local current_tag=$(git describe --abbrev=0 --tags)
-        IFS='.' read -r -a array <<< "${current_tag}"
-        local major=${array[0]}
-        local minor=${array[1]}
-        local patch=${array[2]}
-
-        if [ "$minor" == 999 ] && [ "$patch" == 999 ]; then
-            ((major++))
-            minor=0
-            patch=0
-        elif [ "$patch" == 999 ]; then
-            ((minor++))
-            patch=0
-        else
-            ((patch++))
-        fi
-        new_tag="v${major}.${minor}.${patch}"
-    fi
-    echo $new_tag
-}
-
-#git tag $bump_version_tag
-##echo "new $new_tag"
-#git push origin $NEW_TAG
+git pull
+git commit -am "auto update"
 
 RES=$(git show-ref --tags)
 if [ -z "$RES" ]; then
