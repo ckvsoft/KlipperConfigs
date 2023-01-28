@@ -101,14 +101,14 @@ grab_version(){
 
 push_config(){
   cd $config_folder
-  echo Tagging updates
-  new_tag
   echo Pushing updates
   git pull -v
   git add . -v
   current_date=$(date +"%d-%m-%Y %T")
   git commit -m "Backup triggered on $current_date" -m "$m1" -m "$m2" -m "$m3" -m "$m4"
   git push
+  echo Tagging updates
+  new_tag
 }
 
 grab_version
