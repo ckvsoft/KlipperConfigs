@@ -1,7 +1,8 @@
 #!/bin/bash
 
 git pull
-git commit -am "auto update"
+git add .
+git commit -m "auto update"
 
 #RES=$(git show-ref --tags)
 #if [ -z "$RES" ]; then
@@ -46,8 +47,8 @@ CURRENT_COMMIT_TAG=`git describe --contains $GIT_COMMIT 2>/dev/null`
 #only tag if no tag already (would be better if the git describe command above could have a silent option)
 if [ -z "$CURRENT_COMMIT_TAG" ]; then
     echo "Updating $VERSION to $NEW_TAG"
-    git tag $NEW_TAG
-    git push --tags
+#    git tag $NEW_TAG
+#    git push --tags
     git push
     echo "Tag created and pushed: $NEW_TAG"
 else
