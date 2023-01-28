@@ -72,7 +72,7 @@ grab_version(){
   if [ ! -z "$klipper_folder" ]; then
     echo -n "Getting klipper version="
     cd "$klipper_folder"
-    klipper_commit=$(git rev-parse --short=7 HEAD)
+    klipper_commit=$(git describe --tags)
     m1="Klipper on commit: $klipper_commit"
     echo $klipper_commit
     cd ..
@@ -80,7 +80,7 @@ grab_version(){
   if [ ! -z "$moonraker_folder" ]; then
     echo -n "Getting moonraker version="
     cd "$moonraker_folder"
-    moonraker_commit=$(git rev-parse --short=7 HEAD)
+    moonraker_commit=$(git describe --tags)
     m2="Moonraker on commit: $moonraker_commit"
     echo $moonraker_commit
     cd ..
