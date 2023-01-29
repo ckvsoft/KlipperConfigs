@@ -11,6 +11,7 @@ WantedBy=multi-user.target
 Type=simple
 User=pi
 RemainAfterExit=yes
+ExecStartPost=/home/pi/ckvsoft_config/update.sh
 ExecStart= /home/pi/ckvsoft_config/notify.sh /home/pi/printer_data/config/
 Restart=always
 RestartSec=10
