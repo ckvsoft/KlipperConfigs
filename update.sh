@@ -101,7 +101,7 @@ grab_version(){
 }
 
 push_config(){
-  ionice -c 3 rsync --update --delete-after --exclude 'printer-*' -raz --no-links ~/printer_data/config/ ~/ckvsoft_config/$printer_type
+  ionice -c 3 rsync --update --delete-after --exclude 'printer-*' -raz ~/printer_data/config/ ~/ckvsoft_config/$printer_type
   cd $config_folder
   echo Pushing updates
   git pull -v
