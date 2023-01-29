@@ -111,7 +111,7 @@ push_config(){
   git push
   echo Tagging updates
   new_tag
-  ionice -c 3 rsync --update --delete-after --exclude 'printer-*' -raz --no-links ~/ckvsoft_config/$printer_type ~/printer_data/config/
+  ionice -c 3 rsync --update --delete-after -raz ~/ckvsoft_config/$printer_type ~/printer_data/config/
 }
 
 grab_version
