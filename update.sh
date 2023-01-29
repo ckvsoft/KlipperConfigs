@@ -28,7 +28,8 @@ mainsail_folder=~/mainsail
 ################ !!! DO NOT EDIT BELOW THIS LINE !!! ################
 #####################################################################
 printer_type=$(head -n 1 ~/printer_data/config/.version)
-gh="https://$(tail -n 1 ~/printer_data/config/.version)github.com/ckvsoft/KlipperConfigs.git"
+gh=''
+# "https://$(tail -n 1 ~/printer_data/config/.version)github.com/ckvsoft/KlipperConfigs.git"
 rp=$(realpath ~/printer_data/config/.version)
 
 new_tag(){
