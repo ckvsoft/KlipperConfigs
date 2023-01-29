@@ -53,6 +53,5 @@ type = git_repo
 primary_branch = main
 path = ~/ckvsoft_config
 origin = https://github.com/ckvsoft/KlipperConfigs.git
-is_system_service = False
-managed_services = klipper
+managed_services = ckvsoft_config klipper
 
