@@ -7,7 +7,6 @@
 #####################################################################
 ### Path to your config folder you want to backup
 config_folder=~/ckvsoft_config/
-printer_type=$(head -n 1 ~/printer_data/config/.version)
 
 ### Path to your Klipper folder, by default that is '~/klipper'
 klipper_folder=~/klipper
@@ -28,6 +27,8 @@ mainsail_folder=~/mainsail
 #####################################################################
 ################ !!! DO NOT EDIT BELOW THIS LINE !!! ################
 #####################################################################
+printer_type=$(head -n 1 ~/printer_data/config/.version)
+gh="https://$(tail -n 1 ~/printer_data/config/.version)github.com/ckvsoft/KlipperConfigs.git"
 
 new_tag(){
     VERSION=`git describe --abbrev=0 --tags 2>/dev/null`
@@ -62,7 +63,7 @@ new_tag(){
     if [ -z "$CURRENT_COMMIT_TAG" ]; then
         echo "Updating $VERSION to $NEW_TAG"
         git tag $NEW_TAG
-        git push --tags
+        git push --tags $gh
         echo "Tag created and pushed: $NEW_TAG"
     else
         echo "This commit is already tagged as: $CURRENT_COMMIT_TAG"
@@ -108,7 +109,7 @@ push_config(){
   git add . -v
   current_date=$(date +"%d-%m-%Y %T")
   git commit -m "Backup for $printer_type triggered on $current_date" -m "$m1" -m "$m2" -m "$m3" -m "$m4"
-  git push
+  git push $gh
   echo Tagging updates
   new_tag
   ionice -c 3 rsync --update --delete-after -raz ~/ckvsoft_config/$printer_type ~/printer_data/config/
