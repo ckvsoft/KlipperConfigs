@@ -7,6 +7,7 @@
 #####################################################################
 ### Path to your config folder you want to backup
 config_folder=~/ckvsoft_config/
+printer_type=$(head -n 1 ~/printer_data/config/.version)
 
 ### Path to your Klipper folder, by default that is '~/klipper'
 klipper_folder=~/klipper
@@ -105,7 +106,7 @@ push_config(){
   git pull -v
   git add . -v
   current_date=$(date +"%d-%m-%Y %T")
-  git commit -m "Backup triggered on $current_date" -m "$m1" -m "$m2" -m "$m3" -m "$m4"
+  git commit -m "Backup for $printer_type triggered on $current_date" -m "$m1" -m "$m2" -m "$m3" -m "$m4"
   git push
   echo Tagging updates
   new_tag
