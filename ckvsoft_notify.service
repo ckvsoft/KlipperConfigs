@@ -1,0 +1,16 @@
+
+[Unit]
+Description=Starts inotify
+After=network.target
+Wants=udev.target
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+Type=simple
+User=pi
+RemainAfterExit=yes
+ExecStart= /home/pi/ckvsoft_config/notify.sh /home/pi/printer_data/config/
+Restart=always
+RestartSec=10
