@@ -5,7 +5,7 @@ rp=$(realpath $1)
 echo "watching $rp"
 
 inotifywait -q -m -r $rp | while read DIRECTORY EVENT FILE; do
-    echo "$EVENT $FILE"
+#    echo "$EVENT $FILE"
     case $EVENT in
         MOVED_TO*)
             echo "Moved To $DIRECTORY / $FILE"
