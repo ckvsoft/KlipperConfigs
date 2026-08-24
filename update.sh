@@ -31,6 +31,15 @@ printer_type=$(head -n 1 ~/printer_data/config/.version)
 gh="https://$(tail -n 1 ~/printer_data/config/.version)github.com/ckvsoft/KlipperConfigs.git"
 rp=$(realpath ~/printer_data/config/.version)
 
+push_tag(){
+    if git push --tags $gh; then
+        echo "Tag created and pushed: $1"
+    else
+        echo "Tag push failed, removing local tag: $1" >&2
+        git tag -d $1
+    fi
+}
+
 new_tag(){
     VERSION=`git describe --abbrev=0 --tags 2>/dev/null`
 
@@ -39,8 +48,7 @@ new_tag(){
         echo "No tag present."
         echo "Creating tag: $NEW_TAG"
         git tag $NEW_TAG
-        git push --tags
-        echo "Tag created and pushed: $NEW_TAG"
+        push_tag $NEW_TAG
         exit 0;
     fi
 
@@ -64,8 +72,7 @@ new_tag(){
     if [ -z "$CURRENT_COMMIT_TAG" ]; then
         echo "Updating $VERSION to $NEW_TAG"
         git tag $NEW_TAG
-        git push --tags $gh
-        echo "Tag created and pushed: $NEW_TAG"
+        push_tag $NEW_TAG
     else
         echo "This commit is already tagged as: $CURRENT_COMMIT_TAG"
     fi
@@ -103,18 +110,23 @@ grab_version(){
 }
 
 push_config(){
-  ionice -c 3 rsync --update --delete-after --exclude 'printer-*' -raz ~/printer_data/config/ ~/ckvsoft_config/$printer_type
+  # --no-owner/--no-group: mainsail.cfg is a root-owned symlink, chgrp is not permitted for pi
+  ionice -c 3 rsync --update --delete-after --exclude 'printer-*' -az --no-owner --no-group ~/printer_data/config/ ~/ckvsoft_config/$printer_type
   cd $config_folder
   echo Pushing updates
   git pull -v
   git add . -v
   current_date=$(date +"%d-%m-%Y %T")
   git commit -m "Backup for $printer_type triggered on $current_date" -m "$m1" -m "$m2" -m "$m3" -m "$m4"
-  git push $gh
-  echo Tagging updates
-  new_tag
-  ionice -c 3 rsync --update --delete-after -raz ~/ckvsoft_config/$printer_type ~/printer_data/config/
+  if git push $gh; then
+    echo Tagging updates
+    new_tag
+  else
+    echo "Push failed, skipping tag" >&2
+  fi
+  ionice -c 3 rsync --update --delete-after -az --no-owner --no-group ~/ckvsoft_config/$printer_type ~/printer_data/config/
 }
 
 grab_version
 push_config
+
