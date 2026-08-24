@@ -1,15 +1,15 @@
 #!/bin/bash
 
-rp=$(realpath $1)
+rp=$(realpath "$1")
+update="$(dirname "$(realpath "$0")")/update.sh"
 
 echo "watching $rp"
 
-inotifywait -q -m -r $rp | while read DIRECTORY EVENT FILE; do
-#    echo "$EVENT $FILE"
+inotifywait -q -m -r -e moved_to,delete "$rp" | while read DIRECTORY EVENT FILE; do
     case $EVENT in
         MOVED_TO*)
             echo "Moved To $DIRECTORY / $FILE"
-            ~/ckvsoft_config/update.sh
+            "$update"
             ;;
         DELETE*)
             echo "Delete $DIRECTORY / $FILE"
