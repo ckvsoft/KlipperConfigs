@@ -1,17 +1,17 @@
-
 [Unit]
-Description=Starts inotify
-After=network.target
-Wants=udev.target
-
-[Install]
-WantedBy=multi-user.target
+Description=Klipper config backup (inotify watcher)
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 Type=simple
 User=pi
-RemainAfterExit=yes
-ExecStartPost=/home/pi/ckvsoft_config/update.sh
-ExecStart= /home/pi/ckvsoft_config/notify.sh /home/pi/printer_data/config/
+Group=pi
+WorkingDirectory=/home/pi/ckvsoft_config
+ExecStartPre=/home/pi/ckvsoft_config/update.sh
+ExecStart=/home/pi/ckvsoft_config/notify.sh /home/pi/printer_data/config/
 Restart=always
 RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
